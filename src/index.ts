@@ -1,10 +1,18 @@
 import { Hono } from 'hono'
+import { cors } from 'hono/cors'
 import authRouter from './modules/auth/auth.routes'
 import booksRouter from './modules/books/book.routes'
 import votesRouter from './modules/votes/vote.routes'
 
 const app = new Hono()
 const api = new Hono()
+
+app.use('*', cors({
+  origin: '*',
+  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+}))
 
 app.get('/', (c) => {
   return c.json({
@@ -51,5 +59,6 @@ api.route('/books', booksRouter)
 api.route('/votes', votesRouter)
 
 app.route('/api', api)
+
 
 export default app
