@@ -1,0 +1,11 @@
+import { voteRepository } from "../../repositories/vote.repository";
+
+export async function getUserVotes(userId: string) {
+    return await voteRepository.findByUser(userId);
+}
+
+export async function updateVote(userId: string, bookId: number) {
+    const existingVote = await voteRepository.vote(userId, bookId);
+
+    return existingVote;
+}
