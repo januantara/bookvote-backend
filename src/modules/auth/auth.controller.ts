@@ -45,8 +45,8 @@ export async function login(c: Context) {
 
     setCookie(c, "refresh_token", refreshToken, {
         httpOnly: true,
-        secure: true,
-        sameSite: "Strict",
+        secure: false,
+        sameSite: "Lax",
         path: "/",
         maxAge: 60 * 60 * 24 * 7,
     });
@@ -86,8 +86,8 @@ export async function refresh(c: Context) {
 
     setCookie(c, "refresh_token", newRefreshToken, {
         httpOnly: true,
-        secure: true,
-        sameSite: "Strict",
+        secure: false,
+        sameSite: "Lax",
         path: "/",
         maxAge: 60 * 60 * 24 * 7,
     });
