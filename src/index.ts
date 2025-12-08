@@ -60,5 +60,7 @@ api.route('/votes', votesRouter)
 
 app.route('/api', api)
 
-
-export default app
+export default {
+  port: process.env.PORT || 3000,
+  fetch: app.fetch,
+}
