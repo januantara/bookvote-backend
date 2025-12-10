@@ -14,7 +14,7 @@ export async function getUserVote(c: Context) {
 }
 
 export async function updateVote(c: Context) {
-    const { bookId } = await c.req.json();
+    const { bookId } = c.req.param();
     const user = c.get("user");
 
     if (!user) return c.json({ error: "Unauthorized: Please login first" }, 401);

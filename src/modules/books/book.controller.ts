@@ -2,6 +2,7 @@ import { Context } from "hono";
 import { BookFilterProps } from "./book.repository";
 import { bookService } from "./book.service";
 import { AddBookSchema } from "./book.validation";
+import { voteRepository } from "../votes/vote.repository";
 
 export async function getBooks(c: Context) {
     const {
@@ -51,6 +52,7 @@ export async function addBook(c: Context) {
     }
 
     const newBook = await bookService.addBook(parsed.data);
+    await voteRepository.vote(parsed.data.requestedBy, newBook[0].id);
 
     return c.json(newBook, 201);
 }

@@ -31,7 +31,7 @@ export const books = pgTable("books", {
     category: bookCategoryEnum("category").notNull(),
     isPurchased: boolean("is_purchased").default(false).notNull(),
     purchasedAt: timestamp("purchased_at"),
-    voteCount: integer("vote_count").default(0),
+    voteCount: integer("vote_count").default(1),
     color: text("color").notNull(),
     shelfPosition: text("shelf_position"),
     requestedBy: uuid("requested_by")
