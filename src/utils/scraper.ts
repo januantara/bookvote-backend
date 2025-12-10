@@ -1,11 +1,14 @@
 import { getAverageColor } from "fast-average-color-node";
 
 export async function getBookColor(url: string) {
-    const color = await getAverageColor(url)
+    const color = await getAverageColor(url, {
+        defaultColor: [20, 184, 166, 255],
+        algorithm: "simple"
+    })
     return color.hex
 }
 
-export async function getBookInfoByURL(url: string) {
+export async function scrapeBook(url: string) {
     const fetchResponse = await fetch(url);
     if (!fetchResponse.ok) return { error: "Failed to fetch URL", status: 400 as const };
 
@@ -15,7 +18,7 @@ export async function getBookInfoByURL(url: string) {
     const coverColor = await getBookColor(bookInfo.imageUrl);
 
     if (!bookInfo || !coverColor) return {
-        error: "Failed to fetch book information", status: 500 as const
+        error: "Failed to fetch URL. Please check if the URL is valid and accessible", status: 500 as const
     }
 
     return {
