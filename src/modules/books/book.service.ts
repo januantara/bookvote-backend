@@ -1,4 +1,4 @@
-import { bookRepository, BookFilterProps } from '../../repositories/book.repository';
+import { bookRepository, BookFilterProps } from './book.repository';
 import { getBookInfoByURL } from '../../utils/scraper';
 import { type AddBookDataProps } from './book.validation';
 

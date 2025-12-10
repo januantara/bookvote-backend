@@ -1,11 +1,11 @@
-import { type CreateUserProps, userRepository } from "../../repositories/user.repository";
+import { type CreateUserProps, userRepository } from "./user.repository";
 
 import {
     generateAccessToken,
     generateRefreshToken,
     getRefreshTokenExpiry
 } from "../../utils/jwt";
-import { refreshTokenRepository } from "../../repositories/refreshToken.repository";
+import { refreshTokenRepository } from "./refreshToken.repository";
 
 // =====================================================
 // USER AUTH LOGIC
@@ -32,7 +32,7 @@ export async function registerUser(data:
 ) {
     // Cek apakah user sudah ada
     const exists = await userRepository.findByEmailOrNim(data.email, data.nim);
-    if (exists) return { error: "Email atau NIM sudah terdaftar!" };
+    if (exists) return { error: "Email or student ID already registered" };
 
     const passwordHash = await Bun.password.hash(data.password);
 
@@ -69,6 +69,7 @@ export async function loginUser(nim: string, password: string) {
             email: user.email,
             nim: user.nim,
             role: user.role,
+            createdAt: user.createdAt
         },
         accessToken,
         refreshToken,

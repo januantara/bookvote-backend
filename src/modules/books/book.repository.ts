@@ -1,7 +1,7 @@
-import { db } from "../config/db";
-import { books } from "../db/schema";
+import { db } from "../../config/db";
+import { books } from "../../db/schema";
 import { eq, ilike, and, or, desc, asc } from "drizzle-orm";
-import { AddBookDataProps } from "../modules/books/book.validation";
+import { AddBookDataProps, BookCategoryProps } from "./book.validation";
 
 export interface BookFilterProps {
     search?: string;
@@ -57,7 +57,13 @@ export const bookRepository = {
         return query;
     },
 
-    findTopBooks: async () => db.select().from(books).orderBy(desc(books.voteCount)).limit(10),
+    findTopBooks: async (limit: number = 10) => db.select().from(books).orderBy(desc(books.voteCount)).limit(limit),
+    findTopBooksByCategory: async (category: string, limit: number = 10) => (
+        db.select().from(books)
+            .where(eq(books.category, category as BookCategoryProps))
+            .orderBy(desc(books.voteCount))
+            .limit(limit)
+    ),
     findById: async (bookId: number) => db.select().from(books).where(eq(books.id, Number(bookId))),
     findByName: async (title: string) => db.select().from(books).where(eq(books.title, title)).limit(1),
     getPurchasedBooks: async () => db.select().from(books).where(eq(books.isPurchased, true)),

@@ -1,5 +1,5 @@
-import { db } from "../config/db";
-import { users } from "../db/schema";
+import { db } from "../../config/db";
+import { users } from "../../db/schema";
 import { eq, or } from "drizzle-orm";
 
 export interface CreateUserProps {

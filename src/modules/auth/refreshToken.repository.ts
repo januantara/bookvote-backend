@@ -1,5 +1,5 @@
-import { db } from "../config/db";
-import { refreshTokens } from "../db/schema";
+import { db } from "../../config/db";
+import { refreshTokens } from "../../db/schema";
 import { eq } from "drizzle-orm";
 
 export const refreshTokenRepository = {

@@ -1,6 +1,6 @@
-import { db } from '../config/db';
+import { db } from '../../config/db';
 import { eq, and, sql } from 'drizzle-orm';
-import { books, voteHistory } from '../db/schema';
+import { books, voteHistory } from '../../db/schema';
 import { AnyColumn } from 'drizzle-orm';
 
 const increment = (column: AnyColumn, value = 1) => sql`${column} + ${value}`;

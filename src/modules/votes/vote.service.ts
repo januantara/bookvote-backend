@@ -1,4 +1,4 @@
-import { voteRepository } from "../../repositories/vote.repository";
+import { voteRepository } from "./vote.repository";
 
 export async function getUserVotes(userId: string) {
     return await voteRepository.findByUser(userId);

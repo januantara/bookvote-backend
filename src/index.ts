@@ -3,6 +3,7 @@ import { cors } from 'hono/cors'
 import authRouter from './modules/auth/auth.routes'
 import booksRouter from './modules/books/book.routes'
 import votesRouter from './modules/votes/vote.routes'
+import statsRouter from './modules/stats/stats.route'
 
 const app = new Hono()
 const api = new Hono()
@@ -57,6 +58,7 @@ app.get('/', (c) => {
 api.route('/auth', authRouter)
 api.route('/books', booksRouter)
 api.route('/votes', votesRouter)
+api.route('/stats', statsRouter)
 
 app.route('/api', api)
 

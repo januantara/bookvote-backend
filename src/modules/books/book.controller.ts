@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import { BookFilterProps } from "../../repositories/book.repository";
+import { BookFilterProps } from "./book.repository";
 import { bookService } from "./book.service";
 import { AddBookSchema } from "./book.validation";
 
