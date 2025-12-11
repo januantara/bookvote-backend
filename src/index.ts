@@ -9,7 +9,7 @@ const app = new Hono()
 const api = new Hono()
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://bookvote-api.vercel.app'],
+  origin: ['http://localhost:3000', 'https://bookvote.vercel.app'],
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
