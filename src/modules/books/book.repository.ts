@@ -64,7 +64,7 @@ export const bookRepository = {
             .orderBy(desc(books.voteCount))
             .limit(limit)
     ),
-    findById: async (bookId: number) => db.select().from(books).where(eq(books.id, Number(bookId))),
+    findById: async (bookId: number) => db.query.books.findFirst({ where: eq(books.id, bookId) }),
     findByName: async (title: string) => db.select().from(books).where(eq(books.title, title)).limit(1),
     getPurchasedBooks: async () => db.select().from(books).where(eq(books.isPurchased, true)),
 
