@@ -18,6 +18,9 @@ export const voteRepository = {
     findByUser: (userId: string) =>
         db.query.voteHistory.findMany({
             where: (v) => eq(v.userId, userId),
+            with: {
+                book: true
+            }
         }),
 
     findVotedBook: (userId: string, bookId: number) =>

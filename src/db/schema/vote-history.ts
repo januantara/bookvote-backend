@@ -1,3 +1,4 @@
+import { relations } from 'drizzle-orm';
 import {
     integer,
     pgTable,
@@ -22,4 +23,15 @@ export const voteHistory = pgTable("vote_history", {
     (table) => [
         unique().on(table.userId, table.bookId),
     ]
-)
+);
+
+export const voteHistoryRelations = relations(voteHistory, ({ one }) => ({
+    book: one(books, {
+        fields: [voteHistory.bookId],
+        references: [books.id],
+    }),
+    user: one(users, {
+        fields: [voteHistory.userId],
+        references: [users.id],
+    }),
+}));
