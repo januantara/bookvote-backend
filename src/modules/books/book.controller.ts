@@ -6,12 +6,21 @@ import { voteRepository } from "../votes/vote.repository";
 
 export async function getBooks(c: Context) {
     const {
+        bookId,
         search,
         category,
         sort = "newest",
         isPurchased = false
-    } = c.req.query() as BookFilterProps;
+    } = c.req.query() as BookFilterProps & { bookId?: string };
 
+    // If bookId is provided in query params, return single book
+    if (bookId) {
+        const book = await bookService.getBookById(Number(bookId));
+        if (!book) return c.json({ error: "Book not found" }, 404);
+        return c.json(book);
+    }
+
+    // Otherwise, return filtered list of books
     const books = await bookService.getBooks({ search, category, sort, isPurchased });
     if (books.length === 0) return c.json({ error: "There are no books available for voting" }, 404);
 

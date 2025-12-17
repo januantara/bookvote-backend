@@ -4,6 +4,7 @@ import authRouter from './modules/auth/auth.routes'
 import booksRouter from './modules/books/book.routes'
 import votesRouter from './modules/votes/vote.routes'
 import statsRouter from './modules/stats/stats.route'
+import usersRouter from './modules/users/user.routes'
 
 const app = new Hono()
 const api = new Hono()
@@ -59,6 +60,7 @@ api.route('/auth', authRouter)
 api.route('/books', booksRouter)
 api.route('/votes', votesRouter)
 api.route('/stats', statsRouter)
+api.route('/user/profile', usersRouter)
 
 app.route('/api', api)
 
